@@ -13,6 +13,17 @@ This project was developed for the CS116 - Python for Machine Learning course an
 - Improved performance using Voting and Stacking ensemble models.
 - Achieved a reported Kaggle ranking of Top 79 / 3300, approximately top 2.4%.
 
+## Tech Stack
+
+- Python
+- pandas, NumPy
+- scikit-learn
+- XGBoost, LightGBM, CatBoost
+- Optuna
+- RAPIDS cuML
+- Matplotlib, Seaborn
+- Google Colab, Jupyter Notebook
+
 ## Problem
 
 Rossmann operates over 1,000 stores. The goal is to predict future daily sales for each store based on:
@@ -37,56 +48,13 @@ The raw dataset is not included in this repository because it should be download
 
 Competition page: https://www.kaggle.com/c/rossmann-store-sales
 
-## Methodology
+## Approach
 
-### 1. Exploratory Data Analysis
-
-Key findings:
-
-- `Sales` is right-skewed and contains high-value outliers.
-- Stores are usually closed on Sundays and major holidays.
-- Promotions are strongly associated with higher sales.
-- `Customers`, `Open`, and `Promo` are highly related to `Sales`.
-- Sales show seasonal peaks around March, summer months, and the end of the year.
-
-### 2. Preprocessing
-
-- Merged sales data with store metadata.
-- Filled missing competition and promotion fields using meaningful sentinel values.
-- Filled missing `Open` values in the test set.
-- Removed invalid rows where stores were open but had zero sales.
-- Applied log transformation to the target variable.
-- Used robust scaling for skewed numerical features.
-
-### 3. Feature Engineering
-
-Created features such as:
-
-- Average sales per store per day
-- Average customers per store per day
-- Sales per customer per store
-- Time since Promo2 started
-- Competition age
-- Cyclical date encodings using sine and cosine
-- Distance to seasonal sales peaks such as March, July, and December
-
-### 4. Modeling
-
-Models evaluated:
-
-- Linear Regression
-- Ridge Regression
-- Lasso Regression
-- XGBoost
-- CatBoost
-- LightGBM
-- Voting Regressor
-- Stacking Regressor
-
-Hyperparameter tuning:
-
-- Grid search for linear models
-- Optuna for boosting models
+- Analyzed sales distribution, holidays, promotions, store behavior, and seasonal patterns.
+- Cleaned missing values, invalid records, skewed target values, and outlier-sensitive numerical features.
+- Created store-level, promotion, competition, and cyclical time features.
+- Trained and compared linear models, gradient boosting models, and ensemble regressors.
+- Tuned boosting models with Optuna and evaluated performance using MAE and RMSPE.
 
 ## Results
 
@@ -99,9 +67,9 @@ Hyperparameter tuning:
 | CatBoost | 0.1143 | 0.0183 |
 | LightGBM | 0.1114 | 0.0180 |
 | Voting Regressor | 0.1100 | 0.0179 |
-| Stacking Regressor | 0.1093 | 0.0177 |
+| Stacking Regressor | **0.1093** | **0.0177** |
 
-Reported Kaggle result:
+Reported Kaggle result (Stacking Regressor best):
 
 - Public score: 0.10763
 - Private score: 0.11286
