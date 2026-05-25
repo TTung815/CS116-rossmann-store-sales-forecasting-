@@ -2,7 +2,7 @@
 
 Machine learning project for forecasting daily sales of Rossmann drug stores using historical sales, store metadata, promotion information, holidays, and time-based patterns.
 
-This project was developed for the CS116 - Python for Machine Learning course and submitted to the Kaggle Rossmann Store Sales competition.
+This project was developed for the CS116 - Python for Machine Learning course at the University of Information Technology, VNU-HCM (UIT), and submitted to the Kaggle Rossmann Store Sales competition.
 
 ## Highlights
 
