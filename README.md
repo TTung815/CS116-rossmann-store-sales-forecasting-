@@ -125,34 +125,63 @@ Reported Kaggle result:
 
 ## How to Run
 
-The notebook was originally developed in Google Colab with GPU support.
+The notebook was originally developed in Google Colab with GPU support. It now supports two data-loading modes:
+
+### Option 1: Run Locally
 
 1. Download the dataset from Kaggle.
-2. Place the raw CSV files under `data/raw/`, or update the notebook paths.
+2. Place the raw CSV files under `data/raw/`:
+
+```text
+data/raw/
+├── train.csv
+├── test.csv
+└── store.csv
+```
+
 3. Install the common Python dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Open and run:
+4. Start Jupyter from the repository root and open the notebook:
+
+```bash
+jupyter notebook
+```
+
+5. Run:
 
 ```text
 notebooks/CS116_code.ipynb
 ```
 
-Note: some notebook cells use RAPIDS cuML and GPU-specific settings. For a local CPU-only environment, replace cuML estimators with their scikit-learn equivalents or run the notebook in Colab with a compatible GPU runtime.
+The notebook detects `data/raw/` automatically when the files exist. If you run it from inside the `notebooks/` folder, it also checks the parent repository folder.
+
+Note: the EDA, preprocessing, and feature engineering sections can run in a normal local Python environment after installing the dependencies. The model training section uses RAPIDS cuML and GPU-specific settings, so a CPU-only local machine may require replacing cuML estimators with scikit-learn equivalents.
+
+### Option 2: Run on Google Colab
+
+1. Upload `notebooks/CS116_code.ipynb` to Google Colab.
+2. Enable GPU runtime:
+
+```text
+Runtime > Change runtime type > GPU
+```
+
+3. Run the notebook from the first cell.
+
+If `data/raw/` is not found, the first notebook cell downloads and unzips the dataset into:
+
+```text
+/content/rossmann-store-sales/
+```
+
+This matches the original Colab workflow used for the project.
 
 ## Project Artifacts
 
 - Full report: `reports/CS116_Report.pdf`
 - Presentation slides: `reports/CS116_Final_Slide.pdf`
 - Main notebook: `notebooks/CS116_code.ipynb`
-
-## Future Improvements
-
-- Refactor the notebook into reusable training and inference scripts.
-- Add experiment tracking for model comparison.
-- Add automated data validation.
-- Try external signals such as weather, local events, or economic indicators.
-- Compare with dedicated time-series models such as Prophet, ARIMA, or deep learning architectures.
